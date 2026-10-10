@@ -1,3 +1,8 @@
+Part 1 — SQL Relational Layer & Reporting
+
+Task 1 — Schema (sql/schema.sql)
+
+
 -- sql/schema.sql
 PRAGMA foreign_keys = ON;
 CREATE TABLE customers (
@@ -33,3 +38,6 @@ SELECT name
 FROM sqlite_master
 WHERE type = 'table'
 ORDER BY name;
+
+
+
