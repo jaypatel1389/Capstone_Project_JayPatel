@@ -1,28 +1,3 @@
-{
-  "cleaned_total_revenue_inr": 97358.30,
-  "raw_total_revenue_inr": 99860.20,
-  "duplicate_reconciliation_delta_inr": 2501.90,
-  "return_rate_by_payment": {
-    "COD": 44.4,
-    "CARD": 14.7,
-    "UPI": 18.9
-  },
-  "highest_risk_segment": {
-    "payment_method": "COD",
-    "city_tier": 2,
-    "return_rate_pct": 54.5
-  },
-  "true_peak_month": {
-    "month": "2026-03",
-    "revenue_inr": 20318.90
-  },
-  "outlier_inflated_month": {
-    "month": "2026-01",
-    "apparent_revenue_inr": 29582.10,
-    "corrected_revenue_inr": 11637.10
-  }
-}
-
 """
 analysis/export_findings.py
 Exports the verified EDA figures into narrator/findings.json.
@@ -66,6 +41,8 @@ def export_findings(output_path: str = "narrator/findings.json") -> None:
 
 if __name__ == "__main__":
     export_findings()
+
+
 
 """
 narrator/generate_narrative.py
@@ -172,7 +149,7 @@ def generate_scr_narrative(findings: Dict[str, Any]) -> Dict[str, Any]:
 
 Ensure the narrative explicitly connects the high COD return rates to operational risk and suggests concrete actions in Resolution."""
 
-    try:
+    try: 
         from google import genai
         from google.genai import types
 
@@ -186,7 +163,7 @@ Ensure the narrative explicitly connects the high COD return rates to operationa
             system_instruction=system_instruction,
             temperature=0.0,
             max_output_tokens=800,
-        )
+        ) 
 
         response = client.models.generate_content(
             model="gemini-2.5-flash",
@@ -230,7 +207,7 @@ def verify_numeric_accuracy(narrative_text: str) -> Tuple[bool, Dict[str, bool]]
     check_2 = "44.4" in normalized_text
     check_3 = "54.5" in normalized_text
     check_4 = bool(re.search(r'2501\.90?', normalized_text))
-    
+
     # Check 5: "March" must appear and 20318.90 must be present
     has_march = bool(re.search(r'March|2026-03', normalized_text, re.IGNORECASE))
     has_peak_rev = bool(re.search(r'20318\.90?', normalized_text))
@@ -252,10 +229,19 @@ def verify_numeric_accuracy(narrative_text: str) -> Tuple[bool, Dict[str, bool]]
 # Entry Point / CLI Execution
 # ============================================================================
 def main():
-    findings_file = os.path.join(os.path.dirname(__file__), "findings.json")
+    # Safeguard against undefined __file__ variable in interactive notebooks
+    if "__file__" in globals():
+        base_dir = os.path.dirname(__file__)
+    else:
+        base_dir = os.getcwd()
+
+    findings_file = os.path.join(base_dir, "narrator", "findings.json")
     if not os.path.exists(findings_file):
-        print(f"Error: {findings_file} not found. Run analysis/export_findings.py first.")
-        sys.exit(1)
+        # Fallback to check relative path directly in case base_dir is already narrator
+        findings_file = os.path.join(base_dir, "findings.json")
+        if not os.path.exists(findings_file):
+            print(f"Error: findings.json not found in narrator/ or current dir. Run analysis/export_findings.py first.")
+            sys.exit(1)
 
     with open(findings_file, "r", encoding="utf-8") as f:
         findings = json.load(f)
@@ -278,8 +264,8 @@ def main():
     else:
         print("\nOne or more checks FAILED. Please review the output.")
 
-    # Save to sample_output.txt if requested or missing
-    sample_output_path = os.path.join(os.path.dirname(__file__), "sample_output.txt")
+    # Save output securely
+    sample_output_path = os.path.join(os.path.dirname(findings_file), "sample_output.txt")
     with open(sample_output_path, "w", encoding="utf-8") as f:
         f.write(result["narrative"])
     print(f"Narrative output written to {sample_output_path}")
@@ -287,3 +273,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
