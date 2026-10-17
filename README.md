@@ -1,11 +1,11 @@
-```markdown
-# Mamaearth E-Commerce Analytics & GenAI Narrative Pipeline
+
+Mamaearth E-Commerce Analytics & GenAI Narrative Pipeline
 
 This document guides you through reproducing all reported figures end-to-end across Parts 1, 2, and 3. Follow the steps sequentially from top to bottom.
 
 ---
 
-## 1. Database Setup & SQL Reporting (Part 1)
+1. Database Setup & SQL Reporting (Part 1)
 
 Execute the database schema setup, load the seed transactional data, and run the analytical validation reports:
 
@@ -95,7 +95,6 @@ python narrator/generate_narrative.py
 
 * **No network access, paid quota, or setup required.** The offline path renders the narrative using a deterministic f-string template directly from `narrator/findings.json`.
 
----
 
 ## Verification & Output Artifacts
 
@@ -107,8 +106,4 @@ Both execution paths automatically write the resulting text to `narrator/sample_
 4. **Duplicate Reconciliation Delta:** `INR 2,501.90` (or `2501.9`)
 5. **True Peak Month & Revenue:** `March` together with `INR 20,318.90` (or `20318.9`)
 
-```
 
-<FollowUp label="Would you like an automated grading bash script to verify all three steps in sequence?" query="Can you provide a shell script that runs the entire pipeline from Step 1 to Step 3 and confirms zero errors?"/>
-
-```
