@@ -1,0 +1,8 @@
+Situation
+The cleaned order analysis reports INR 97,358.30 in revenue across the deduplicated dataset, compared with the raw-source total of INR 99,860.20. COD orders have a 44.4% return rate, versus 14.7% for CARD and 18.9% for UPI. After quantity outliers are excluded from the monthly comparison, March 2026 is the genuine revenue peak at INR 20,318.90.
+
+Complication
+The raw-to-cleaned revenue difference is INR 2,501.90. This reconciliation is attributable to removing duplicate orders; filling missing discount values with zero and ratings with the median does not change order value. Return risk is not evenly distributed: COD orders in Tier-2 cities have the highest segment return rate at 54.5%. The apparent lead for January 2026 is misleading: its outlier-inflated revenue is INR 29,582.10, but the corrected value is INR 11,637.10 after the flagged quantity outliers are excluded.
+
+Resolution
+Reconcile financial reporting to the cleaned revenue of INR 97,358.30 and retain a clear audit trail for the INR 2,501.90 duplicate-order adjustment. Prioritize a focused review of COD fulfillment, customer expectations, and return reasons in Tier-2 cities, while comparing operational practices with the lower-return CARD and UPI segments. Use the outlier-corrected monthly series for planning and reporting, treating March 2026 (INR 20,318.90) as the true peak rather than relying on the inflated January 2026 result. Continue monitoring return rates by payment method and city tier so actions target the highest-risk segment.
