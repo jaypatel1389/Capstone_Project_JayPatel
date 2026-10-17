@@ -1,11 +1,11 @@
 ```markdown
-# Mamaearth E-Commerce Analytics & GenAI Narrative Pipeline
+**# Mamaearth E-Commerce Analytics & GenAI Narrative Pipeline**
 
 This document guides you through reproducing all reported figures end-to-end across Parts 1, 2, and 3. Follow the steps sequentially from top to bottom.
 
 ---
 
-## 1. Database Setup & SQL Reporting (Part 1)
+**## 1. Database Setup & SQL Reporting (Part 1)**
 
 Execute the database schema setup, load the seed transactional data, and run the analytical validation reports:
 
